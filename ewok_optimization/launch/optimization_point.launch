@@ -1,0 +1,16 @@
+<launch>
+	<node name="spline_optimization_example" pkg="ewok_optimization" type="spline_optimization_example3" output="screen">
+ 		<!--<rosparam param="x_pos">[0.5, 15.0, 0.5]</rosparam> 
+		<rosparam param="y_pos">[0.0, 0.0, 0.0]</rosparam> 
+		<rosparam param="z_pos">[1.0, 1.0, 2.0]</rosparam>-->
+
+		<rosparam param="x_pos">[0.0, 0.0]</rosparam> 
+		<rosparam param="y_pos">[0.0, -6.0]</rosparam> 
+		<rosparam param="z_pos">[1.5, 1.5]</rosparam>
+
+
+		<param name="number_of_target" type="int" value="2"/>
+	</node>
+
+	<!--<node type="rviz" name="rviz" pkg="rviz" args="-d $(find ewok_optimization)/rviz/optimization_example.rviz" />--> 
+</launch>
