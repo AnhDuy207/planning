@@ -79,8 +79,18 @@ public:
 
 	cv::Mat get_d(int i) {
 			return cv::imread(path + depth_image_files[i],
-					CV_LOAD_IMAGE_UNCHANGED);
+					-1);
 	}
+	//cv::Mat get_d(int i) {
+	//		return cv::imread(path + depth_image_files[i],
+	//				-1);
+	//}
+	//cv::Mat get_d(int i) {
+	//		a = cv::Mat(3,3)			
+	//		return a;
+	//}
+
+
 	Eigen::Matrix4f get_pose(int i) {
 		return poses[i].matrix();
 	}

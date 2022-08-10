@@ -386,7 +386,7 @@ class UniformBSpline3DOptimization {
     setQuadraticErrorWeights(Vector3(0.1, 0.1, 0.1));
     setNumCollisionChecksPerSegment(10);
 
-    distance_threshold_ = 0.5; //0.5
+    distance_threshold_ = 1.5; //0.5
 
     setLimits(Vector4(2,5,0,0));
     limits_weight_ = 1.0;

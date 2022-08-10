@@ -53,20 +53,7 @@ void depthImageCallback(const sensor_msgs::Image::ConstPtr& msg)
     cv_bridge::CvImageConstPtr cv_ptr;
     try
     {
-        cv_ptr = cv_bridge::toCvShare(msg);
-        //std::cout << "SIZE_2: "<< cv_ptr->encoding << std::endl;
-        //cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::TYPE_32FC1);
-        
-        //Diep
-        // cv_bridge::CvImagePtr cv_ptr;
-
-        // cv_ptr = cv_bridge::toCvCopy(msg, msg->encoding);
-        // if (msg->encoding == sensor_msgs::image_encodings::TYPE_16UC1)
-        // {
-        //     (cv_ptr->image).convertTo(cv_ptr->image, CV_32FC1, -1.0);
-        // }
-
-        //cv_ptr->image.copyTo(md_.depth_image_);
+	    cv_ptr = cv_bridge::toCvShare(msg);
     }
     catch (cv_bridge::Exception& e)
     {
@@ -106,7 +93,7 @@ void depthImageCallback(const sensor_msgs::Image::ConstPtr& msg)
     Eigen::Affine3f T_w_c = dT_w_c.cast<float>();
 
     std :: cout << "\n\n================================" << std::endl;
-    std :: cout << "\n" << T_w_c.matrix();
+    std :: cout << "\n" << T_w_c.matrix() << std::endl;;
 
     float * data = (float *) cv_ptr->image.data;
 
@@ -249,7 +236,7 @@ int main(int argc, char** argv) {
         upt_marker_pub.publish(m_updated);
         dist_marker_pub.publish(m_dist);
 
-        //rrb.moveVolume(Eigen::Vector3i(1,0,0)); 
+        rrb.moveVolume(Eigen::Vector3i(1,0,0));
 
         ros::spinOnce();
     }
@@ -257,8 +244,8 @@ int main(int argc, char** argv) {
 
     ros::spin();
 
-    //f_time.close();
-    //opt_time.close();
+    f_time.close();
+    opt_time.close();
     std::cout << "Hello5_________________" << std::endl;
     return 0;  
 }
@@ -523,7 +510,8 @@ int main(int argc, char** argv) {
 
 //     std::cout << "Hello3_________________" << std::endl;
     
-//     double resolution;
+//     double resolution;/camera/depth/image_rect_raw
+
 //     pnh.param("resolution", resolution, 0.15);
 //     edrb.reset(new ewok::EuclideanDistanceRingBuffer<POW>(resolution, 1.0));
 //     std::cout << "Hello4_________________" << std::endl;

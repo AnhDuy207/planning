@@ -233,6 +233,7 @@ void OffboardControl::inputSetpoint()
     if (mode == '1') // hovering
     {
         double x, y, z;
+        geometry_msgs::Quaternion yaw;
         double hover_time;
         std::printf("\n[ INFO] Mode 1: Hovering\n");
         std::printf(" Please enter the altitude you want to hover (in meters): ");
@@ -241,9 +242,13 @@ void OffboardControl::inputSetpoint()
         std::cin >> hover_time;
         x = current_odom_.pose.pose.position.x;
         y = current_odom_.pose.pose.position.y;
-
+        //yaw = current_odom_.pose.pose.orientation;
+        //setOffboardStream(10.0, targetTransfer(x, y, z, yaw));
         setOffboardStream(10.0, targetTransfer(x, y, z));
         waitForArmAndOffboard(10.0);
+
+        // takeOff(targetTransfer(x, y, z, yaw), hover_time);
+        // landing(targetTransfer(x, y, 0.0, yaw));
 
         takeOff(targetTransfer(x, y, z), hover_time);
         landing(targetTransfer(x, y, 0.0));
@@ -711,9 +716,6 @@ void OffboardControl::plannerFlight()
 
     while (ros::ok())
     {
-        
-
-
         setpoint = targetTransfer(x_target_[0], y_target_[0], z_target_[0]);
         // if(first_receive_hover == true)
         // {
@@ -1320,6 +1322,7 @@ geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, d
     target.pose.position.x = x;
     target.pose.position.y = y;
     target.pose.position.z = z;
+    //target.pose.orientation = 0;
     return target;
 }
 
@@ -1332,6 +1335,16 @@ geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, d
     target.pose.position.y = y;
     target.pose.position.z = z;
     target.pose.orientation = tf::createQuaternionMsgFromYaw(radianOf(yaw));
+    return target;
+}
+
+geometry_msgs::PoseStamped OffboardControl::targetTransfer(double x, double y, double z, geometry_msgs::Quaternion yaw)
+{
+    geometry_msgs::PoseStamped target;
+    target.pose.position.x = x;
+    target.pose.position.y = y;
+    target.pose.position.z = z;
+    target.pose.orientation = yaw;
     return target;
 }
 

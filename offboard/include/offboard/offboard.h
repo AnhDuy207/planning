@@ -142,6 +142,7 @@ class OffboardControl
 	sensor_msgs::NavSatFix goalTransfer(double lat, double lon, double alt); // transfer lat, lon, alt setpoint to same message type with gps setpoint msg
 	geometry_msgs::PoseStamped targetTransfer(double x, double y, double z); // transfer x, y, z setpoint to same message type with enu setpoint msg
 	geometry_msgs::PoseStamped targetTransfer(double x, double y, double z, double yaw); // transfer x, y, z (meter) and yaw (degree) setpoint to same message type with enu setpoint msg
+	geometry_msgs::PoseStamped targetTransfer(double x, double y, double z, geometry_msgs::Quaternion yaw);
 
 	bool checkPositionError(double error, geometry_msgs::PoseStamped target); // check offset between current position from odometry and setpoint position to decide when drone reached setpoint
 	bool checkPositionError(double error, geometry_msgs::PoseStamped current, geometry_msgs::PoseStamped target); // check offset between current position and setpoint position to decide when drone reached setpoint
