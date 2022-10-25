@@ -1,5 +1,4 @@
 # planning AirSim
-# planning
 `*` Control drone by code Position + Yaw <br>
 `*` Avoid obstacles by code Ewok <br>
 
